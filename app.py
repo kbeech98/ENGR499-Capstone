@@ -18,7 +18,6 @@ def home():
                 return redirect(request.url)
         text = request.form.get('avatar')
     return render_template('index.html', text=filename)
-    return render_templata('index.html', data=data)
 
 app.config['FILE_UPLOADS'] = "C:\Users\Jonathan\Downloads"
 if __name__ == '__main__':
