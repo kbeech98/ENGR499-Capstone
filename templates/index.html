@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Break Tempurature Generator
+    </title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        button {
+            color: rgb(11, 172, 212);
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Break Tempurature Generator</h1>
+    <div>
+        <form method="POST">
+            <textarea rows="8" cols="60" name="Velocity-content" placeholder="Enter track data here" value="{{ text }}">{{ text }}</textarea>
+           
+
+            <form method="POST" enctype="multipart/form-data">
+                <div>
+                  <label for="file">Choose file to upload</label>
+                  <input type="file" id="avatar" name="avatar" accept=".csv" />
+                </div>
+            
+
+            <div>
+                <button type="submit">Submit</button>
+                <a href="/">Reset</a>
+            </div>
+        </form>
+    </div>
+    <div>
+        <p id="display">{{ text }}</p>
+    </div>
+</body>
+
+</html>
