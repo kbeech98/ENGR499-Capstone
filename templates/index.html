@@ -3,7 +3,7 @@
 
 <head>
     <title>
-        Break Tempurature Generator
+        Brake Temperature Predictor
     </title>
     <style>
         body {
@@ -11,31 +11,25 @@
         }
 
         button {
-            color: rgb(11, 172, 212);
-            background-color: blue;
+            color: aliceblue;
+            background-color: rgb(50,205,50);
         }
     </style>
 </head>
 
 <body>
-    <h1>Break Tempurature Generator</h1>
+    <h1>Brake Temperature Predictor</h1>
     <div>
-        
-            <form method="POST" enctype="multipart/form-data">
-                <div>
-                  <label for="file">Choose file to upload</label>
-                  <input type="file" id="avatar" name="avatar" accept=".csv" />
-                </div>
-            
-
+        <h3>Upload CSV</h3>
+        <form method="POST" enctype="multipart/form-data" action="/">
+            <input type="file" id="myFile" name="filename" accept=".csv">
             <div>
-                <button type="submit">Submit</button>
-                <a href="/">Reset</a>
+                <button type="submit">Submit </button>
             </div>
         </form>
     </div>
     <div>
-        <p id="display">{{ avatar }}</p>
+        <p id="display">{{ data }}</p>
     </div>
 </body>
 
