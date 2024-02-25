@@ -3,33 +3,67 @@
 
 <head>
     <title>
-        Brake Temperature Predictor
+        Brake Temperature Model
     </title>
     <style>
         body {
             text-align: center;
         }
 
-        button {
+        #container{
+            display: inline-block;
+        }
+
+        #mySubBtn {
+            /* margin-right: 20px; */
             color: aliceblue;
             background-color: rgb(50,205,50);
         }
+
+        #myRstBtn {
+            color: aliceblue;
+            background-color: rgb(244, 32, 25);
+        }
+        
+        #myFile {
+            display: inline-block;
+        }
+
+        #myForm {
+            display: inline-block;
+
+        }
+
+        #mySubmission {
+            display: inline;
+        }
+
+        #myOutput {
+            display: inline-block;
+        }
+
     </style>
 </head>
 
 <body>
-    <h1>Brake Temperature Predictor</h1>
+    <h1>Brake Temperature Model</h1>
     <div>
         <h3>Upload CSV</h3>
-        <form method="POST" enctype="multipart/form-data" action="/">
-            <input type="file" id="myFile" name="filename" accept=".csv">
-            <div>
-                <button type="submit">Submit </button>
-            </div>
-        </form>
+            <form method="POST" id="myForm" enctype="multipart/form-data" action="/">
+                <div id="mySubmission">
+                    <input type="file" id="myFile" name="file" accept=".csv" >
+                    <button type="submit" id="mySubBtn">Submit </button>
+                </div>
+            </form>
+            <form method="POST" id="myForm" enctype="multipart/form-data" action="/" d>
+                <div>
+                    <button type="submit" id="myRstBtn" name="reset" value="true">Reset </button >
+                </div>
+            </form>
     </div>
-    <div>
-        <p id="display">{{ data }}</p>
+    <div id="myOutput">
+        <p> Uploaded files: </p>
+        <p id="display"> {{ data }}</p>
     </div>
 </body>
 
