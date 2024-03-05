@@ -2,29 +2,34 @@
 <html>
 
 <head>
-    <title>
-        Brake Temperature Model
-    </title>
+    <title>Home</title>
     <style>
         body {
             text-align: center;
         }
 
+        #banner {
+            background-color: rgba(0,2,63,255);
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%;
+            height: 132px;
+        }
         #container{
             display: inline-block;
         }
 
-        #mySubBtn {
-            /* margin-right: 20px; */
-            color: aliceblue;
-            background-color: rgb(50,205,50);
+        #bannerimage {
+            height: 60px;
+            background-color: rgba(0,2,63,255);
+            background-position: center;
         }
 
-        #myRstBtn {
-            color: aliceblue;
-            background-color: rgb(244, 32, 25);
+        #inputForm { 
+            margin-top: 132px;
         }
-        
+
         #myFile {
             display: inline-block;
         }
@@ -42,28 +47,43 @@
             display: inline-block;
         }
 
+        .logo {
+            max-width: 100px;
+        }
+
     </style>
 </head>
 
 <body>
-    <h1>Brake Temperature Model</h1>
-    <div>
-        <h3>Upload CSV</h3>
-            <form method="POST" id="myForm" enctype="multipart/form-data" action="/">
-                <div id="mySubmission">
-                    <input type="file" id="myFile" name="file" accept=".csv" >
-                    <button type="submit" id="mySubBtn">Submit </button>
-                </div>
-            </form>
-            <form method="POST" id="myForm" enctype="multipart/form-data" action="/" d>
-                <div>
-                    <button type="submit" id="myRstBtn" name="reset" value="true">Reset </button >
-                </div>
-            </form>
+    <div class="header", id="banner">
+        <img src="{{url_for('static', filename='logo.jpg')}}" id="bannerimage" alt="Logo" width="50" height="50">
     </div>
-    <div id="myOutput">
-        <p> Uploaded files: </p>
-        <p id="display"> {{ data }}</p>
+    <div id="inputForm">
+        <h1>Brake Temperature Model</h1>
+        <div>
+            <h3>Upload CSV</h3>
+                <form method="POST" id="myForm" enctype="multipart/form-data" action="/results">
+                    <div id="mySubmission">
+                        <input type="file" id="myFile" name="file" accept=".csv" >
+                        <button type="submit" id="mySubBtn" name="predict">Predict Temperature</button>
+                    </div>
+                </form>
+                <!-- <form method="POST" id="myForm" enctype="multipart/form-data" action="/" d>
+                    <div>
+                        <button type="submit" id="myRstBtn" name="reset" value="true">Reset </button >
+                    </div>
+                </form> -->
+        </div>
+        <div id="myOutput">
+            <!-- <p> Uploaded files: {{ data }} </p> -->
+        </div>
+        <div id="myPrediction">
+            <form method="POST" id="myForm" enctype="multipart/form-data" action="/results" d>
+                <div>
+                    <!-- <button type="submit" id="myPredictionBtn" name="predict" value="true">Predict Temperatures</button > -->
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 
