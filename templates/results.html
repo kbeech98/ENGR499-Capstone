@@ -2,35 +2,72 @@
 <html>
 
 <head>
-    <title>
-        These are the results
-    </title>
+    <title>Home</title>
     <style>
         body {
             text-align: center;
         }
 
+        #banner {
+            background-color: rgba(0,2,63,255);
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%;
+            height: 132px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+             
+        }
         #container{
             display: inline-block;
         }
 
-        /* #mySubBtn {
-            color: aliceblue;
-            background-color: rgb(50,205,50);
-        } */
+        #bannerimage {
+            height: 80px;
+            margin-left: 30px;
+            margin-top: 0px;
+            width: fit-content;
+            position: absolute;
+            left: 0;
+            background-color: rgba(0,2,63,255);
+        }
 
-        /* #myRstBtn {
-            color: aliceblue;
-            background-color: rgb(244, 32, 25);
-        } */
-        
+        #pagetitle { 
+            text-align: center;
+            color: #ffffff;
+        }
+
+        #mainContainer {
+            display: flex;
+            align-items: center; 
+        }
+        #inputForm { 
+            /* margin-top: 132px; */
+            margin-top: 15%;
+            background-color: rgb(216, 213, 213);
+            border-radius: 25px;
+            margin-left: 3%;
+            width: fit-content;
+            height:fit-content;
+            padding: 2%;
+        }
+
+        #plotForm {
+            display: inline-block;
+            margin-top: 15%;
+            margin-left: 3%;
+            /* background-color: rgb(216, 213, 213); */
+        }
+
         #myFile {
             display: inline-block;
         }
 
         #myForm {
             display: inline-block;
-
+            margin-top: 4%;
         }
 
         #mySubmission {
@@ -41,31 +78,69 @@
             display: inline-block;
         }
 
-        /* #myPrediction {
-
-        } */
-
-        /* #myPredictionBtn {
-            display: inline-block;
-        } */
+        .logo {
+            max-width: 100px;
+        }
 
     </style>
+        <script>
+            window.onload = function() {
+                document.getElementById('myForm').onsubmit = function() {
+                    var fileInput = document.getElementById('myFile');
+                    if(fileInput.files.length === 0) {
+                        alert('Please select a file to upload');
+                        return false; // Prevent form submission
+                    }
+                }
+            }
+        </script>
 </head>
 
 <body>
-    <h1>These are the results</h1>
-    <div>
+    <div class="header", id="banner">
+        <img src="https://images.squarespace-cdn.com/content/v1/652b89bf7ea1df37ad06bfef/c6a35588-0050-405f-99d3-d947198fd741/tight+OK+logo+no+background.png" id="bannerimage" alt="Logo" width="50" height="50">
+        <div id = "pagetitle">
+            <h1> OK Motorsports' Brake Temperature Predictor</h1>
+            <h4>Built by the best capstone group :) </h4>
+        </div>
         
     </div>
-    <div id="myOutput">
-    </div>
-    <!-- <div id="myPrediction">
-        <form method="POST" id="myForm" enctype="multipart/form-data" action="/" d>
+    <div id="mainContainer">   
+        <div id="inputForm">
             <div>
-                <button type="submit" id="myPredictionBtn" name="predict" value="true">Predict Temperatures</button >
+                <h2>Input track data for desired temperature prediction</h2>
+                <h4>Required input parameters = accel, vel, ..ect</h4>
+                    <form method="POST" id="myForm" enctype="multipart/form-data" action="/results">
+                        <div id="mySubmission">
+                            <input type="file" id="myFile" name="file" accept=".csv" >
+                            <button type="submit" id="mySubBtn" name="predict">Predict Temperature</button>
+                        </div>
+                    </form>
+                    <!-- <form method="POST" id="myForm" enctype="multipart/form-data" action="/" d>
+                        <div>
+                            <button type="submit" id="myRstBtn" name="reset" value="true">Reset </button >
+                        </div>
+                    </form> -->
+                <h4>Upload data file in CSV format</h4>
             </div>
-        </form>
-    </div> -->
+            <div id="myOutput">
+                <!-- <p> Uploaded files: {{ data }} </p> -->
+            </div>
+            <div id="myPrediction">
+                <form method="POST" id="myForm" enctype="multipart/form-data" action="/results" d>
+                    <div>
+                        <!-- <button type="submit" id="myPredictionBtn" name="predict" value="true">Predict Temperatures</button > -->
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="plotForm">
+            <p> <img src="{{url_for('static', filename='Predicted_temp_plt.png')}}"></p>
+        </div>
+        <div>
+            <a href="{{url_for('static', filename='predicted_temp.csv')}}" download="Brake Rotor Predicted Temperature">Download Predicted Temperature Data</a>
+        </div>
+    </div> 
 </body>
 
 </html>
