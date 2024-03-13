@@ -41,7 +41,16 @@
 
 
         #inputForm { 
-            margin-top: 132px;
+            /* margin-top: 132px; */
+            display: table;
+            margin-top: 15%;
+            margin-right: auto;
+            margin-left: auto;
+            background-color: rgb(216, 213, 213);
+            border-radius: 25px;
+            width: fit-content;
+            height:fit-content;
+            padding: 2%;
         }
 
         #myFile {
@@ -50,7 +59,7 @@
 
         #myForm {
             display: inline-block;
-
+            margin-top: 4%;
         }
 
         #mySubmission {
@@ -89,9 +98,9 @@
         
     </div>
     <div id="inputForm">
-        <h2>Brake Temperature Model</h2>
         <div>
-            <h3>Upload CSV</h3>
+            <h2>Input track data for desired temperature prediction</h2>
+            <h4>Required input parameters = accel, vel, ..ect</h4>
                 <form method="POST" id="myForm" enctype="multipart/form-data" action="/results">
                     <div id="mySubmission">
                         <input type="file" id="myFile" name="file" accept=".csv" >
@@ -103,6 +112,7 @@
                         <button type="submit" id="myRstBtn" name="reset" value="true">Reset </button >
                     </div>
                 </form> -->
+            <h4>Upload data file in CSV format</h4>
         </div>
         <div id="myOutput">
             <!-- <p> Uploaded files: {{ data }} </p> -->
