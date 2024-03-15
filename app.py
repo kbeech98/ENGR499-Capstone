@@ -110,6 +110,9 @@ def process_prediction(csv_filename):
         prev_lap_time[0] = df['lap_time'][0]
         prev_lap_time[1:] = df['lap_time'][0:length_lap-1]
 
+        change_in_time = np.zeros(length_lap)
+        change_in_time[:] = lap_time[:] -prev_lap_time[:]
+
         # Calculate gforce magnitude
         g_x = np.array(df['gforce_X'])
         g_y = np.array(df['gforce_Y'])
@@ -165,11 +168,26 @@ def process_prediction(csv_filename):
             testing_features[i+1,0] = model.predict(testing_features[i, :].reshape(1,-1))
         predicted_temp = testing_features[:,0]
         
+        #generate heatflux data (create prev_temp, change_temp arrays)
+        predicted_temp_prev = np.zeros(length_lap)
+        predicted_temp_prev[1:] = predicted_temp[:167255]
+        change_in_temp = np.zeros(length_lap)
+        change_in_temp[1:] = predicted_temp[:167255] -predicted_temp_prev[:167255]
+
+
+        m = 1
+        c = 1
+        A = 1
+        heatflux = np.zeros(length_lap)
+        heatflux[:] = (m*c*change_in_temp[:])/(change_in_time[:]*A)
+
         #clear previous plots and predicted temperature
         clear_plots()
         clear_predicted()
 
         #generate new plot 
+        plt. clf() 
+        fig1 = plt.figure()
         x_points = (np.arange(sum(df['lapNum'] == 15)))
         plt.plot(x_points, predicted_temp[df['lapNum'] == 15], label='Predicted Temperature')
         plt.legend()
@@ -177,10 +195,22 @@ def process_prediction(csv_filename):
         plt.xlabel('Samples (Will be converted to distance)')
         plt.ylabel('Brake Rotor Temperature (*C)')
         plt.savefig('static\Predicted_temp_plt.png')
+        fig2 = plt.figure()
+        x_points = (np.arange(sum(df['lapNum'] == 15)))
+        plt.plot(x_points, heatflux[df['lapNum'] == 15], label='HeatFlux')
+        plt.legend()
+        plt.title('HeatFlux over one lap')
+        plt.xlabel('Samples (Will be converted to distance)')
+        plt.ylabel('Units idk')
+        plt.savefig('static\heat_flux.png')
+
+
 
         #generate predicted temperature data csv 
         predicted_temp_df = pd.DataFrame(predicted_temp)
         predicted_temp_df.to_csv("static/predicted_temp.csv")
+
+
 
         #output predicted temperature important features/characteristics (max/min temp, average.. ect)
 
